@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MoneyManageApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+ 
+
+<nav class="navbar navbar-default navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<%= root_path %>">Bill Splitting Web App</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="<%= events_path %>">Events</a></li>
+      <li><a href="<%= users_path %>">Users</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <%= yield %>
+</div>
+</body>
+</html>
