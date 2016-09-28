@@ -47,8 +47,7 @@ class Event < ActiveRecord::Base
           user_payment.each do |current_user, payment| 
             next if  user_payment[user_id] >= amount_to_pay
             if payment > amount_to_pay
-              
-              value = summary[User.find(current_user).name].present? ? ([summary[User.find(current_user).name]] + [[payment - amount_to_pay,User.find(user_id).name]]) : ([payment - amount_to_pay,User.find(user_id).name])
+              value = summary[User.find(current_user).name].present? ? ([summary[User.find(current_user).name]] + [[amount_to_pay -  user_payment[user_id],User.find(user_id).name]]) : ([amount_to_pay -  user_payment[user_id],User.find(user_id).name])
               summary[User.find(current_user).name] = value
             end
             #summary << "#{User.find(current_user).name} owe $ #{payment - amount_to_pay} from #{User.find(user_id).name}" if payment > amount_to_pay
@@ -82,6 +81,6 @@ class Event < ActiveRecord::Base
   private
   def limit_event_managers
     user_count = User.count
-     errors.add(:base, "You can have #{user_count} fields") if user_count > self.event_managers.length
+     errors.add(:base, "You can have #{user_count} fields") if user_count < self.event_managers.length
   end
 end
