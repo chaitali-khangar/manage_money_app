@@ -12,12 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
 //= require_tree .
 
-var ready = function() {
-	$('.datepicker').datepicker({
-		  format: 'mm-dd-yyyy'
-	});
-	$(".selectpicker").selectpicker();
-};

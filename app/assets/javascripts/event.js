@@ -6,5 +6,10 @@ $(document).on('nested:fieldAdded', function(event){
   // and activate datepicker on it
   selectField.selectpicker();
 })
+var ready = function() {
+	$('.datepicker').datepicker({
+		  format: 'mm-dd-yyyy'
+	});
+};
+
 $(document).ready(ready);
-$(document).on('page:change', ready);
