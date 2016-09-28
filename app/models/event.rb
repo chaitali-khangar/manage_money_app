@@ -2,8 +2,11 @@ class Event < ActiveRecord::Base
   EVENT_TYPE_ENUM = ["LUNCH","DINNER","SNACKS"]
   has_many :event_managers
   has_many :users , :through => :event_managers
+  validates :event_date, :location,:total_amount, presence: true
+ 
   accepts_nested_attributes_for :event_managers,:allow_destroy => true,:limit=> User.count
 
+  
 
   # attr_accessor :event_manager_ids, :event_amount_paid_by
   # before_save :save_event_manager_ids
@@ -24,8 +27,8 @@ class Event < ActiveRecord::Base
   end
 
   def owe_summary
-    event_attendee = self.event_managers.select(:id,:user_id,:amount).order("amount desc")
-    max_amount = event_attendee.first.amount
+    event_attendee = self.event_managers.where("amount IS NOT NULL or user_id IS NOT NULL").select(:id,:user_id,:amount).order("amount desc")
+    max_amount = event_attendee.first.amount rescue nil
     users = event_attendee.collect{|user| user.user_name if user.amount == max_amount}.compact rescue []
     max_paid_user = users.to_sentence(:words_connector => ' , ',:last_word_connector=> " and ") rescue nil if users.present?
     per_user_amount_pay = self.per_user_amount

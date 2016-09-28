@@ -1,4 +1,4 @@
-<%= javascript_include_tag :defaults, "nested_form","event" %>
+
 
 <%= nested_form_for(@event) do |f| %>
   <% if @event.errors.any? %>
@@ -19,7 +19,7 @@
   </div>
   <div class="form-group">
     <%= f.label :event_date %><br>
-    <%= f.text_field :event_date, class: "datepicker" %>
+    <%= f.text_field :event_date, class: "datepicker", :readonly=> :true %>
   </div>
   <div class="form-group">
     <%= f.label :location %><br>
@@ -33,16 +33,16 @@
   
     <%= f.fields_for :event_managers, :wrapper => false do |event_manager| %>
       <tr class="field">
-        <td>Event Adttended By: <%= event_manager.collection_select(:user_id,@users,:id,:name,{prompt: true},{class: "selectpicker"})  %></td>
-        <td>Amount paid by: $ <%= event_manager.text_field :amount, class: "form-control"   %></td>
-        <td><%= event_manager.link_to_remove "Remove this User" %></td>
+        <td>Event Adttended By: <%= event_manager.collection_select(:user_id,@users,:id,:name,{prompt: true},{class: "selectpicker attendee"})  %></td>
+        <td>Amount paid by: $ <%= event_manager.text_field :amount, class: "form-control amount"   %></td>
+      
         </tr>
     <% end %>
     </table>
     <p><%= f.link_to_add "Add a Event Attended By", :event_managers, "data-target" => "#event_managers" %></p>
   </div>
   <div class="actions">
-    <%= f.submit "Submit", class:"btn btn-primary" %>
+    <%= f.submit "Submit", class:"btn btn-primary", id: "submit_btn" %>
   </div>
 <% end %>
 

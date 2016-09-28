@@ -2,17 +2,12 @@
 <html>
 <head>
   <title>MoneyManageApp</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag    'application' %>
   <%= javascript_include_tag 'application' %>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
+  <%= stylesheet_link_tag "bootstrap.min.css", "bootstrap-datepicker"%>
+  <%= javascript_include_tag "bootstrap.min","bootstrap-datepicker" %>
+ 
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 
   <%= csrf_meta_tags %>
 </head>
@@ -33,5 +28,6 @@
 <div class="container">
   <%= yield %>
 </div>
+
 </body>
 </html>

@@ -1,7 +1,11 @@
 class EventManager < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
-  delegate :name, to: :user, prefix: true
 
+  validates :amount, :user_id , presence: true
+  
+  def user_name
+  	self.user.name rescue nil
+  end
 
 end
