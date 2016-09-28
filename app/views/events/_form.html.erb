@@ -33,8 +33,10 @@
   
     <%= f.fields_for :event_managers, :wrapper => false do |event_manager| %>
       <tr class="field">
+
         <td>Event Adttended By: <%= event_manager.collection_select(:user_id,@users,:id,:name,{prompt: true},{class: "selectpicker attendee"})  %></td>
-        <td>Amount paid by: $ <%= event_manager.text_field :amount, class: "form-control amount"   %></td>
+        <td>Amount paid by: $ <%= event_manager.number_field :amount, class: "form-control amount"   %></td>
+        <td><%= event_manager.link_to_remove "Remove this task", :onclick=> "$(this).closest('.field').remove()" %></td>
       
         </tr>
     <% end %>

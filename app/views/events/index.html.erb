@@ -27,7 +27,10 @@
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @events, renderer: BootstrapPagination::Rails %>
 <br>
 
+
+<strong>Own amount Summary:</strong>
+<p><%= Event.overall_summary.html_safe %></p>
 <%= link_to 'New Event', new_event_path %>
