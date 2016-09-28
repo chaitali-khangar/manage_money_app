@@ -4,7 +4,9 @@ class Event < ActiveRecord::Base
   has_many :users , :through => :event_managers
   validates :event_date, :location,:total_amount, presence: true
   validates_associated :event_managers
-  accepts_nested_attributes_for :event_managers,:allow_destroy => true,:limit=> User.count
+  validate :limit_event_managers
+
+  accepts_nested_attributes_for :event_managers,:allow_destroy => true
 
 
 
@@ -75,5 +77,11 @@ class Event < ActiveRecord::Base
       end
     end
     summary_html
+  end
+
+  private
+  def limit_event_managers
+    user_count = User.count
+     errors.add(:base, "You can have #{user_count} fields") if user_count > self.event_managers.length
   end
 end

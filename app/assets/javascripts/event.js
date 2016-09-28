@@ -30,27 +30,36 @@ $(document).ready(function() {
 			alert("Please enter details of attendee")
 			return false
 		}
-		else if($("#event_total_amount").val() != sum){
-			alert("All event attendee sum should be equal to total amount")
-			return false
+		else if(sum){
+			if ($("#event_total_amount").val() != sum){
+			  alert("All event attendee sum should be equal to total amount")
+			  return false;
+			}
+			
 		}
 	});
-	$(".add_nested_fields").on("click",function(){
-		attendee_length = $(".attendee:first option").length;
-		if(attendee_length != 0 && ($(".field").length < attendee_length)){
-			return true;
-		}else if(attendee_length != 0){
-			alert("All users attend the event.")
-			return false;
-		}
-	})
 });
 
-// $(document).on('nested:fieldAdded', function(event){
-//   // this field was just inserted into your form
-//   var field = event.field; 
-//   // it's a jQuery object already! Now you can find date input
-//   var selectField = field.find('.selectpicker');
-//   // and activate datepicker on it
-//   selectField.selectpicker();
-// })
+$(function() {
+  var fieldsCount,
+      maxFieldsCount = $("#max_user").length,
+      $addLink = $('a.add_nested_fields');
+
+  function toggleAddLink() {
+    $addLink.toggle(fieldsCount <= maxFieldsCount)
+  }
+
+  $(document).on('nested:fieldAdded', function() {
+    fieldsCount += 1;
+    toggleAddLink();
+  });
+
+  $(document).on('nested:fieldRemoved', function() {
+    fieldsCount -= 1;
+    toggleAddLink();
+  });  
+
+  // count existing nested fields after page was loaded
+  fieldsCount = $('form .fields').length;
+  toggleAddLink();
+})

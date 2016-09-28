@@ -12,7 +12,7 @@
       </ul>
     </div>
   <% end %>
-
+  <%= hidden_field_tag :max_user, @users.length%>
   <div class="form-group">
     <%= f.label :event_type %><br>
     <%= f.select :event_type, Event::EVENT_TYPE_ENUM,{}, {class: "selectpicker"} %>
@@ -41,7 +41,7 @@
         </tr>
     <% end %>
     </table>
-    <p><%= f.link_to_add "Add a Event Attended By", :event_managers, "data-target" => "#event_managers" %></p>
+    <p><%= f.link_to_add "Add a Event Attended By", :event_managers, "data-target" => "#event_managers"%></p>
   </div>
   <div class="actions">
     <%= f.submit "Submit", class:"btn btn-primary", id: "submit_btn" %>
