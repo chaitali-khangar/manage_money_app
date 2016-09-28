@@ -1,3 +1,9 @@
+$(document).ready(function() {
+	$('.datepicker').datepicker({
+		  format: 'mm-dd-yyyy'
+	});
+});
+
 $(document).on('nested:fieldAdded', function(event){
   // this field was just inserted into your form
   var field = event.field; 
@@ -6,10 +12,3 @@ $(document).on('nested:fieldAdded', function(event){
   // and activate datepicker on it
   selectField.selectpicker();
 })
-var ready = function() {
-	$('.datepicker').datepicker({
-		  format: 'mm-dd-yyyy'
-	});
-};
-
-$(document).ready(ready);
