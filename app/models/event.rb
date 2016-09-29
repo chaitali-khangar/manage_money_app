@@ -81,6 +81,6 @@ class Event < ActiveRecord::Base
   private
   def limit_event_managers
     user_count = User.count
-     errors.add(:base, "You can have #{user_count} fields") if user_count < self.event_managers.length
+     errors.add(:base, "You can have #{user_count} fields max") if user_count < self.event_managers.length
   end
 end
